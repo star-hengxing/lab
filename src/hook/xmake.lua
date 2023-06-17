@@ -1,8 +1,6 @@
-add_requires("vc-ltl5")
 add_requires("microsoft-detours")
 
 add_defines("WIN32_LEAN_AND_MEAN")
-add_packages("vc-ltl5")
 
 target("test")
     set_kind("binary")

@@ -17,4 +17,10 @@ if is_host("windows") then
     add_cxflags("/source-charset:utf-8", {tools = "cl"})
 end
 
+if is_plat("windows") then
+    set_runtimes(is_mode("debug") and "MDd" or "MD")
+end
+
+add_includedirs("src")
+
 includes("src")
