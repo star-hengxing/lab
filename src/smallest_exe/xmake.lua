@@ -1,13 +1,14 @@
-target("test")
+target("smallest")
     set_kind("binary")
-    set_arch("x86")
     add_files("*.cpp")
-    set_targetdir(path.join(os.projectdir(), "build", "smallest_exe"))
 
     add_ldflags(
         "/entry:main",
         "/subsystem:windows",
-        "/align:16", {force = true})
+        "/align:16",
+
+        "/EMITPOGOPHASEINFO", -- remove debug dir
+    {force = true, tools = "link"})
 
     add_syslinks("user32")
 

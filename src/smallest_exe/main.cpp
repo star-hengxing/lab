@@ -1,5 +1,6 @@
 #include <Windows.h>
 
-int main() {
-    MessageBox(NULL, "Hello, World", NULL, MB_OK);
+int main()
+{
+    ::MessageBox(nullptr, "Hello World", nullptr, MB_OK);
 }
