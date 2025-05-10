@@ -1,5 +1,7 @@
 add_requires("microsoft-detours")
 
+set_languages("c++20")
+
 add_defines("WIN32_LEAN_AND_MEAN")
 
 target("test")

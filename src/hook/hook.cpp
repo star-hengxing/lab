@@ -1,3 +1,5 @@
+#include <cstdlib>
+
 #include <windows.h>
 #include <detours.h>
 
