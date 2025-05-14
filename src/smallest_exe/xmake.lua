@@ -13,9 +13,14 @@ target("smallest")
     add_syslinks("user32")
 
     after_build(function (target)
-        local file = io.open(target:targetfile(), "r")
-        local size, error = file:size()
-        file:close()
+        import("core.project.depend").on_changed(function()
+            local file = io.open(target:targetfile(), "r")
+            local size, error = file:size()
+            file:close()
 
-        print("size:", size, "bytes")
+            print("size:", size, "bytes")
+        end, {
+            files = target:targetfile(),
+            changed = target:is_rebuilt()
+        })
     end)
