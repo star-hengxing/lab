@@ -50,13 +50,13 @@ rule("dll_hijacking")
                         static fn_payload exports[] = {
                     ]])
                     for _, symbol in ipairs(symbols) do
-                        dll_file:print([[{.name = "%s"},]], symbol)
+                        dll_file:print([[{.name = "%s"},]], symbol.name)
                     end
                     dll_file:print("};")
                     for i, symbol in ipairs(symbols) do
-                        local name = symbol
+                        local name = symbol.name
                         dll_file:print("void WINAPI stub_%s() {", name)
-                        dll_file:print([[#pragma comment(linker, "/EXPORT:%s=stub_%s")]], name, name)
+                        dll_file:print([[#pragma comment(linker, "/EXPORT:%s=stub_%s,@%d")]], name, name, symbol.ordinal)
                         dll_file:print("exports[%d].fn();", i - 1)
                         dll_file:print("}")
                     end

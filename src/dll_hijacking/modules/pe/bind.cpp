@@ -23,9 +23,18 @@ static int get_exports(lua_State* lua)
         lua_State* lua;
         int i;
 
-        void push_string(const char* str)
+        void push_string(const char* name, uint16_t ordinal)
         {
-            lua_pushstring(lua, str);
+            lua_createtable(lua, 0, 2);
+
+            lua_pushstring(lua, "name");
+            lua_pushstring(lua, name);
+            lua_settable(lua, -3);
+
+            lua_pushstring(lua, "ordinal");
+            lua_pushinteger(lua, ordinal);
+            lua_settable(lua, -3);
+
             lua_rawseti(lua, -2, i);
             i += 1;
         }
@@ -40,7 +49,7 @@ static int get_exports(lua_State* lua)
             char* functionforwardername,
             void* callbackdata
         ) -> int {
-            reinterpret_cast<lua_table*>(callbackdata)->push_string(functionname);
+            reinterpret_cast<lua_table*>(callbackdata)->push_string(functionname, ordinal);
             return 0;
     }, &table);
 
