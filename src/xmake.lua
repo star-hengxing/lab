@@ -1,11 +1,12 @@
-if has_config("hook") then
-    includes("hook")
-end
+local labs = {
+    "hook",
+    "smallest_exe",
+    "pe",
+    "dll_hijacking",
+}
 
-if has_config("smallest_exe") then
-    includes("smallest_exe")
-end
-
-if has_config("pe") then
-    includes("pe")
+for _, lab in ipairs(labs) do
+    if has_config(lab) then
+        includes(lab)
+    end
 end
